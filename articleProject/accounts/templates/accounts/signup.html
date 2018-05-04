@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+<!-- {% load bootstrap %} -->
+
+{% block content %}
+	<div id="signup-part">
+		<div class="container">
+			<h2>Signup Form</h2>
+			<div class="divider"></div>
+			<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-xs-12">	
+				<div class="signup-content">	
+					<form class="signup-form" method="post" action="/account/signup/">
+						{% csrf_token %}
+						<!-- {{ form | bootstrap }} -->
+						{% for field in form %}
+				            <div class="form-group has-errors text-danger small">
+				                {{field.errors}}
+				            </div>
+				            <div class="form-group">
+				                {{ field.label_tag }} 
+				                {{ field }}
+				            </div>
+			            {% endfor %}
+						<div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<input type="submit" class="form-control btn btn-success" value="Signup">
+						</div>
+					</form>
+				</div>
+			</div>		
+		</div>
+	</div>		 
+{% endblock %}
