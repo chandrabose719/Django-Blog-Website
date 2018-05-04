@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	<div id="create-article-part">
+		<div class="container">
+			<h2>Create New Article</h2>
+			<div class="divider"></div>			
+			<div class="create-article-content">
+				<form method="post" action="{% url 'articles:create_article' %}">
+					{% csrf_token %}
+					{{ form }}
+					<input type="submit" value="Post The Article">	
+				</form>
+			</div>	
+		</div>
+	</div>
+{% endblock %}

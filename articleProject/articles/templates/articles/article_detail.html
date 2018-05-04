@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div id="article-detail-part">
+	<div class="container">
+		<div class="article-detail-content">
+			<h2>{{ article.title }}</h2>
+			<div class="divider"></div>
+			<p>{{ article.content }}</p>
+			<h2>Leave Your Comment:</h2>
+			{% if request.user.is_authenticated %}
+				<form method="post" action="{% url 'articles:add_comment' slug=article.slug %}">
+					{% csrf_token %}
+					{{ form.as_p }}	
+					<input type="submit" class="btn btn-success" value="Post The Comment">
+				</form>
+				<a href="{% url 'articles:auther_article' %}">Back To Dashboard</a>
+			{% else %}
+				{% for comment in article.comment_set.all %}
+					<p>{{ comment.userName }}</p>
+					<p>{{ comment.email }}</p>
+					<p>{{ comment.comment }}</p>
+					<p>{{ comment.posted }}</p>
+					<div class="divider"></div>
+				{% endfor %}
+				<a href="{% url 'accounts:signin' %}">Post Your Comment</a>
+			{% endif %}
+			<a href="{% url 'articles:all_article' %}">Back To All Articles</a>
+		</div>	
+	</div>	
+</div>
+{% endblock %}
