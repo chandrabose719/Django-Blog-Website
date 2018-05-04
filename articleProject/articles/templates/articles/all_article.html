@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div id="all-article-part">
+	<div class="container">
+		<h2> All Articles</h2>
+		<div class="divider"></div>	
+		{% for article in articles %}
+			<div class="all-article-content">
+				<h4>{{ article.title }}</h4>
+				<p>{{ article.content }}</p>
+				<p>{{ article.date }}</p>
+				<a href="{% url 'articles:article_detail' slug=article.slug %}">Read More...</a>
+			</div>
+		{% endfor %}
+	</div>	
+</div>
+{% endblock %}
